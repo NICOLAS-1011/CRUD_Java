@@ -1,0 +1,17 @@
+#header{
+    margin: 0.5%;
+    height: 80px;
+    background-color:#FF7602;
+}
+
+#titulo{
+    font-size: 39.5px;
+    text-align: center;
+    margin-top: -1%;
+}
+
+#lista{
+    height: 50px;
+    width: 50px;
+    margin-left: 50px;
+}

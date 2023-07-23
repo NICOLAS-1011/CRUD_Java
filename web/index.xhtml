@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Proyecto de prueba</title>
+        <link rel="stylesheet" href="./css/index.css" type="text/css" media="screen"></link>
+    </h:head>
+    <h:body>
+        
+        <header id="header">
+
+            <i id="lista" class="bi bi-list"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg></i>
+
+            <h1 id="titulo">CRUD JAVA</h1>
+
+            <i id="usuario" class="bi bi-person-circle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg></i>
+            <i id="ingresar" class="bi bi-person-vcard"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
+                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
+              </svg></i>
+
+        </header>
+        
+        <h:form>
+            <p:commandButton value="Agregar Productos" actionListener="#{beanProductos.limpiarProductos()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+        </h:form>
+        
+        <br></br>
+        
+        <h:form id="formularioLista">
+            <p:dataTable id="tablaProductos" var="productos" value="#{beanProductos.productosList}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{productos.id}" />
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{productos.nombre}" />
+                </p:column>
+                <p:column headerText="Cantidad">
+                    <h:outputText value="#{productos.cantidad}" />
+                </p:column>
+                <p:column headerText="Precio">
+                    <h:outputText value="#{productos.precio}" />
+                </p:column>
+                            
+                <p:column>
+                    <p:commandButton value="Editar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                        <f:setPropertyActionListener target="#{beanProductos.productos}" value="#{productos}"/>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="">
+                    <p:commandButton value="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                        <f:setPropertyActionListener target="#{beanProductos.productos}" value="#{productos}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        
+        <h:form id="formAgregar">
+            <p:dialog id="dlgAgregar" header="Agregar Productos" widgetVar="dialogoAgregar">
+                <p:panelGrid columns="2">                                
+                    <p:outputLabel value="Id: "/>
+                        <p:inputText value="#{beanProductos.productos.id}"/>
+                    <p:outputLabel value="Nombre: "/>
+                        <p:inputText value="#{beanProductos.productos.nombre}"/>
+                    <p:outputLabel value="Cantidad: "/>
+                        <p:inputText value="#{beanProductos.productos.cantidad}"/>
+                    <p:outputLabel value="Precio: "/>
+                        <p:inputText value="#{beanProductos.productos.precio}"/>       
+                </p:panelGrid>
+                <p:commandButton  value="Guardar" actionListener="#{beanProductos.agregarProductos()}" update=":formularioLista:tablaProductos" onsuccess="" oncomplete="PF('dialogoAgregar').hide();"/>
+                    <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formModificar">
+            <p:dialog id="dlgModificar" header="Modificar Productos" widgetVar="dialogoModificar">
+                <p:panelGrid columns="2">                                
+                    <p:outputLabel value="Id: "/>
+                        <p:inputText value="#{beanProductos.productos.id}"/>
+                    <p:outputLabel value="Nombre: "/>
+                        <p:inputText value="#{beanProductos.productos.nombre}"/>
+                    <p:outputLabel value="Cantidad: "/>
+                        <p:inputText value="#{beanProductos.productos.cantidad}"/>
+                    <p:outputLabel value="Precio: "/>
+                        <p:inputText value="#{beanProductos.productos.precio}"/>
+                                
+                </p:panelGrid>
+                    <p:commandButton  value="Guardar" actionListener="#{beanProductos.modificarProductos()}" update=":formularioLista:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
+                    <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formEliminar">
+            <p:dialog id="dlgEliminar" header="Eliminar Productos" widgetVar="dialogoEliminar">
+                <h:outputText value="Desea eliminar este producto?"/>
+                    <p:commandButton  value="Si" actionListener="#{beanProductos.eliminarProductos()}" update=":formularioLista:tablaProductos" oncomplete="PF('dialogoEliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+            </p:dialog>
+        </h:form>
+                    
+        
+    </h:body>
+    
+</html>
