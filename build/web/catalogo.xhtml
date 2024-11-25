@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Catalogo</title>
+        <link rel="stylesheet" href="./css/index.css" type="text/css" media="screen"></link>
+        
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Introducing Lollipop, a sweet new take on Android." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+        
+        <!-- Page styles -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css" />
+        <link rel="stylesheet" href="styles.css"/>
+        <style type="text/css">
+          #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+          }
+        </style>
+    </h:head>
+    <h:body>
+        
+        
+        
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+                <div class="mdl-layout__header-row">
+                    <span class="android-title mdl-layout-title">
+                        <img class="android-logo-image" src="images/logo.png" alt="Logo" />
+                    </span>
+                    <div class="android-header-spacer mdl-layout-spacer"></div>
+                    <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+                      <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                        <i class="material-icons">search</i>
+                      </label>
+                      <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search-field" oninput="filtrarProductos()"/>
+                      </div>
+                    </div>
+                    <div class="android-navigation-container">
+                        <nav class="android-navigation mdl-navigation">
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.html">Home</a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/CRUD_Java">Catálogo</a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="contacto.html">Contacto</a>
+                        </nav>
+                    </div>
+                    <span class="android-mobile-title mdl-layout-title">
+                      <img class="android-logo-image" src="images/logo.png" alt="Mobile Logo" />
+                    </span>
+                    <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+                        <li><h:form><p:commandButton class="mdl-menu__item" value="Agregar Productos" actionListener="#{beanProductos.limpiarProductos()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/></h:form></li>
+                        <li class="mdl-menu__item">Editar Videojuego</li>
+                        <li class="mdl-menu__item" disabled="disabled">Eliminar Videojuego</li>
+                        <li class="mdl-menu__item">Salir</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="android-drawer mdl-layout__drawer">
+                <span class="mdl-layout-title">
+                    <img class="android-logo-image" src="images/image.png" alt="Drawer Image" />
+                </span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="">Acción</a>
+                    <a class="mdl-navigation__link" href="">Aventura</a>
+                    <a class="mdl-navigation__link" href="">Arcade</a>
+                    <a class="mdl-navigation__link" href="">Deportes</a>
+                    <a class="mdl-navigation__link" href="">Estrategia</a>
+                    <a class="mdl-navigation__link" href="">Simulación</a>
+                    <div class="android-drawer-separator"></div>
+                    <span class="mdl-navigation__link" href="">Acciones</span>
+                    <a class="mdl-navigation__link" href="/CRUD_Java">Consultar Videojuegos</a>
+                    <a class="mdl-navigation__link" href="/CRUD_Java">Crear Videojuego</a>
+                    <a class="mdl-navigation__link" href="/CRUD_Java">Editar Videojuego</a>
+                    <a class="mdl-navigation__link" href="/CRUD_Java">Eliminar Videojuego</a>
+                    <div class="android-drawer-separator"></div>
+                    <span class="mdl-navigation__link" href="">Resources</span>
+                    <a class="mdl-navigation__link" href="">A cerca de nosotros</a>
+                    <a class="mdl-navigation__link" href="">Android on Google+</a>
+                    <a class="mdl-navigation__link" href="">Android on Twitter</a>
+                    <div class="android-drawer-separator"></div>
+                    <span class="mdl-navigation__link" href="">For developers</span>
+                    <a class="mdl-navigation__link" href="">Nicolás Espitia Villamil</a>
+                    <a class="mdl-navigation__link" href="">Luna Delgado Alejo</a>
+              </nav>
+            </div>
+            
+            
+            <div class="android-content mdl-layout__content">
+                <div class="android-more-section">
+                    <div class="android-section-title mdl-typography--display-1-color-contrast">Catálogo</div>
+                    <div class="android-card-container mdl-grid" id="tablaProductosDiv">
+                        <ui:repeat id="tablaProductos" var="productos" value="#{beanProductos.productosList}">
+                            <!-- Cada tarjeta ocupará 3 columnas -->
+                            <div class="mdl-cell mdl-cell--3-col mdl-card mdl-shadow--3dp">
+                                <div class="mdl-card__title">
+                                    <h4 class="mdl-card__title-text">#{productos.nombre}</h4>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <span class="mdl-typography--font-light mdl-typography--subhead">
+                                        Cantidad: #{productos.cantidad} | Precio: #{productos.precio}
+                                    </span>
+                                </div>
+                                
+                                <div class="mdl-card__actions">
+                                    <p:commandButton class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" value="Editar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                        <f:setPropertyActionListener target="#{beanProductos.productos}" value="#{productos}"/>
+                                    </p:commandButton>
+                                    <p:commandButton class="mdl-button mdl-js-button mdl-button--accent" value="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{beanProductos.productos}" value="#{productos}"/>
+                                    </p:commandButton>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+        
+        
+        <h:form id="formAgregar">
+            <p:dialog id="dlgAgregar" header="Agregar Productos" widgetVar="dialogoAgregar">
+                <p:panelGrid columns="2">                                
+                    <p:outputLabel value="Id: "/>
+                        <p:inputText value="#{beanProductos.productos.id}"/>
+                    <p:outputLabel value="Nombre: "/>
+                        <p:inputText value="#{beanProductos.productos.nombre}"/>
+                    <p:outputLabel value="Cantidad: "/>
+                        <p:inputText value="#{beanProductos.productos.cantidad}"/>
+                    <p:outputLabel value="Precio: "/>
+                        <p:inputText value="#{beanProductos.productos.precio}"/>       
+                </p:panelGrid>
+                <p:commandButton  value="Guardar" actionListener="#{beanProductos.agregarProductos()}" update="formAgregar" onsuccess="" oncomplete="PF('dialogoAgregar').hide();"/>
+                    <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formModificar">
+            <p:dialog id="dlgModificar" header="Modificar Productos" widgetVar="dialogoModificar">
+                <p:panelGrid columns="2">                                
+                    <p:outputLabel value="Id: "/>
+                        <p:inputText value="#{beanProductos.productos.id}"/>
+                    <p:outputLabel value="Nombre: "/>
+                        <p:inputText value="#{beanProductos.productos.nombre}"/>
+                    <p:outputLabel value="Cantidad: "/>
+                        <p:inputText value="#{beanProductos.productos.cantidad}"/>
+                    <p:outputLabel value="Precio: "/>
+                        <p:inputText value="#{beanProductos.productos.precio}"/>
+                </p:panelGrid>
+                    <p:commandButton  value="Guardar" actionListener="#{beanProductos.modificarProductos()}" update="" oncomplete="PF('dialogoModificar').hide();"/>
+                    <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formEliminar">
+            <p:dialog id="dlgEliminar" header="Eliminar Productos" widgetVar="dialogoEliminar">
+                <h:outputText value="Desea eliminar este producto?"/>
+                    <p:commandButton  value="Si" actionListener="#{beanProductos.eliminarProductos()}" update="" oncomplete="PF('dialogoEliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+            </p:dialog>
+        </h:form>
+                    
+        <script>
+            function filtrarProductos() {
+              const filtro = document.getElementById('search-field').value.toLowerCase();
+              const productos = document.querySelectorAll('#tablaProductosDiv .mdl-card');
+
+              productos.forEach(producto => {
+                const nombre = producto.querySelector('h4').textContent.toLowerCase();
+                producto.style.display = nombre.includes(filtro) ? '' : 'none';
+              });
+            }
+        </script>
+
+          
+    </h:body>
+    
+</html>
